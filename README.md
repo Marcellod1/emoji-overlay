@@ -1,2 +1,2 @@
 # emoji-overlay
-An emoji based overlay that facilitates passive communication between a group of individuals. Uses Google's teachable machine to update emoji based facial expressions for each individual on the connection.
+An emoji based overlay that facilitates passive communication between a group of individuals. Uses the python DeepFace library to update emoji based facial expressions for each individual on the connection.
