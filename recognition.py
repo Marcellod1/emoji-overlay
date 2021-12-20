@@ -1,8 +1,16 @@
 from predict import WebcamPredictor
 
 predictor = WebcamPredictor()
-predictor.updatewebcam()
-prediction = predictor.predictexpression()
 
+while(True):
+    predictor.updatewebcam()
+    try:
+        prediction = predictor.predicthand()
 
-print(prediction)
+        if(prediction == "neutral"):
+            prediction = predictor.predictexpression()
+            
+        print(prediction)
+
+    except(Exception):
+        print("Predictor Error")
