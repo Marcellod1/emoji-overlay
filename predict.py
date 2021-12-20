@@ -6,11 +6,19 @@ import cv2
 
 
 class WebcamPredictor:
-
-
     def __init__(self):
-        # model and image paths
-        self.hand_model_path = "resources/models/keras_model.h5"
+        # Hand model init
+        self.hand_model_path = "resources/models/hand_model"
+        self.hand_model_classes = []
+
+        # parse labels from model into a list
+        f = open(self.hand_model_path + "/labels.txt", "r")
+        while(line := f.readline().rstrip()):
+            line_class = line.split(" ")[1]
+            self.hand_model_classes.append(line_class.lower()) 
+        f.close() 
+
+        # Webcam init
         self.webcam_image_path = "resources/img/image.jpg"
         self.camera = cv2.VideoCapture(0)
         self.updatewebcam()
@@ -24,12 +32,13 @@ class WebcamPredictor:
 
     def predictexpression(self):
         obj = DeepFace.analyze(img_path = self.webcam_image_path, actions = ['emotion'])
-        print("EMOTION: {}\n".format(obj['dominant_emotion']))
+        # print("EMOTION: {}\n".format(obj['dominant_emotion']))
+        return obj['dominant_emotion']
 
 
     def predicthand(self):
         # Load the model
-        model = load_model(self.hand_model_path)
+        model = load_model(self.hand_model_path + "/keras_model.h5")
         # Create the array of the right shape to feed into the keras model
         # The 'length' or number of images you can put into the array is
         # determined by the first position in the shape tuple, in this case 1.
@@ -49,5 +58,6 @@ class WebcamPredictor:
         data[0] = normalized_image_array
 
         # run the inference
-        prediction = model.predict(data)
-        print(prediction)
+        prediction = model.predict(data)[0]
+        max_index = np.argmax(prediction)
+        return self.hand_model_classes[max_index]
