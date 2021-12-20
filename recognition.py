@@ -6,14 +6,14 @@ from PIL import ImageTk, Image
 predictor = WebcamPredictor()
 root = tk.Tk()
 root.attributes('-alpha', 1.0)
-root.geometry("600x900")
+root.geometry("600x600")
 root.title("Emoji Overlay")
 
 img = ImageTk.PhotoImage(Image.open(predictor.webcam_image_path))
 img_label = tk.Label(root, image=img)
 
 text = tk.StringVar()
-text_label = tk.Label(root, textvariable=text, font=("Arial", 25))
+text_label = tk.Label(root, textvariable=text, font=("Times New Roman", 25))
 text.set("Marcello")
 
 img_label.grid(row = 0, column = 0)

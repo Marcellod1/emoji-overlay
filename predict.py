@@ -19,7 +19,7 @@ class WebcamPredictor:
         f.close() 
 
         # Webcam init
-        self.webcam_image_path = "resources/img/image.jpg"
+        self.webcam_image_path = "resources/img/webcam.jpg"
         self.camera = cv2.VideoCapture(0)
         self.updatewebcam()
 
