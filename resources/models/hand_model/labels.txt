@@ -1,5 +1,5 @@
 0 Neutral
 1 Thinking
-2 Facepalm
-3 Ok
-4 Peace
+2 Ok
+3 Peace
+4 Facepalm

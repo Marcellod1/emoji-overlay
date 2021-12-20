@@ -1,10 +1,13 @@
-from predict import WebcamPredictor
 import tkinter as tk
 from PIL import ImageTk, Image
+from pyp2p.net import *
+import socket
 
-predictor = WebcamPredictor()
+HOST = "127.0.0.1"
+PORT = 65432
+
 root = tk.Tk()
-root.wm_attributes('-transparentcolor', 'white')
+# root.wm_attributes('-transparentcolor', 'white')
 root.geometry("300x1000")
 root.title("Emoji Overlay")
 
@@ -19,7 +22,7 @@ static_img_2_label = tk.Label(root, image=static_img_2)
 
 text = tk.StringVar()
 text_label = tk.Label(root, textvariable=text, font=("Times New Roman", 15))
-text.set("Chris")
+text.set("Marcello")
 
 static_text_1 = tk.StringVar()
 static_text_1_label = tk.Label(root, textvariable=static_text_1, font=("Times New Roman", 15))
@@ -40,20 +43,18 @@ static_img_2_label.grid(row = 4, column = 0)
 static_text_2_label.grid(row = 5, column = 0)
 
 
-
-
-while(1):
-    # update window image
-    predictor.updatewebcam()
-
-    # img=ImageTk.PhotoImage(Image.open(predictor.webcam_image_path))
-    # img_label.configure(image=img)
-    # img_label.image=img
-    root.update()
-
-    try:
-        prediction = predictor.predictexpression()
-        print(prediction)
-
-    except(Exception):
-        print("Predictor Error")
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print("Connected by", addr)
+        
+        while 1:
+            data = conn.recv(1024)
+            if(data):
+                data = str(data.decode())
+                img=ImageTk.PhotoImage(Image.open("resources/img/" + data + ".png"))
+                img_label.configure(image=img)
+                img_label.image=img
+            root.update()
