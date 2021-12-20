@@ -7,7 +7,11 @@ Python 3.8 or higher
 
 # Running
 cd <PROJECT_ROOT>
-python -m venv venv
+
+python -m venv venv 
+
 ./venv/Scripts/Activate.ps1
+
 pip install -r requirements.txt
+
 python recognition.py
