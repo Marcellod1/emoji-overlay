@@ -2,30 +2,53 @@ from predict import WebcamPredictor
 import tkinter as tk
 from PIL import ImageTk, Image
 
-
 predictor = WebcamPredictor()
 root = tk.Tk()
-root.attributes('-alpha', 1.0)
-root.geometry("600x600")
+root.wm_attributes('-transparentcolor', 'white')
+root.geometry("300x1000")
 root.title("Emoji Overlay")
 
-img = ImageTk.PhotoImage(Image.open(predictor.webcam_image_path))
+img = ImageTk.PhotoImage(Image.open("resources/img/thinking.png"))
 img_label = tk.Label(root, image=img)
 
+static_img_1 = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
+static_img_1_label = tk.Label(root, image=static_img_1)
+
+static_img_2 = ImageTk.PhotoImage(Image.open("resources/img/facepalm.png"))
+static_img_2_label = tk.Label(root, image=static_img_2)
+
 text = tk.StringVar()
-text_label = tk.Label(root, textvariable=text, font=("Times New Roman", 25))
-text.set("Marcello")
+text_label = tk.Label(root, textvariable=text, font=("Times New Roman", 15))
+text.set("Chris")
+
+static_text_1 = tk.StringVar()
+static_text_1_label = tk.Label(root, textvariable=static_text_1, font=("Times New Roman", 15))
+static_text_1.set("Rory")
+
+static_text_2 = tk.StringVar()
+static_text_2_label = tk.Label(root, textvariable=static_text_2, font=("Times New Roman", 15))
+static_text_2.set("Abraham")
+
 
 img_label.grid(row = 0, column = 0)
 text_label.grid(row = 1, column = 0)
+
+static_img_1_label.grid(row = 2, column = 0)
+static_text_1_label.grid(row = 3, column = 0)
+
+static_img_2_label.grid(row = 4, column = 0)
+static_text_2_label.grid(row = 5, column = 0)
+
+
+
 
 while(1):
     # update window image
     predictor.updatewebcam()
 
-    img=ImageTk.PhotoImage(Image.open(predictor.webcam_image_path))
-    img_label.configure(image=img)
-    img_label.image=img
+    # img=ImageTk.PhotoImage(Image.open(predictor.webcam_image_path))
+    # img_label.configure(image=img)
+    # img_label.image=img
     root.update()
 
     try:
