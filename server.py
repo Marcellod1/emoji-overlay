@@ -3,7 +3,7 @@ from PIL import ImageTk, Image
 from pyp2p.net import *
 import socket
 
-HOST = "127.0.0.1"
+HOST = "10.0.0.177"
 PORT = 65432
 
 root = tk.Tk()
@@ -22,7 +22,7 @@ static_img_2_label = tk.Label(root, image=static_img_2)
 
 text = tk.StringVar()
 text_label = tk.Label(root, textvariable=text, font=("Times New Roman", 15))
-text.set("Marcello")
+text.set("Chris")
 
 static_text_1 = tk.StringVar()
 static_text_1_label = tk.Label(root, textvariable=static_text_1, font=("Times New Roman", 15))
