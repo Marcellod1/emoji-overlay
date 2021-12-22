@@ -14,4 +14,8 @@ python -m venv venv
 
 pip install -r requirements.txt
 
-python recognition.py
+In two local terminals:
+
+python server.py
+
+python client.py
