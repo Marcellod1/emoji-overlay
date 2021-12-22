@@ -3,21 +3,21 @@ from PIL import ImageTk, Image
 from pyp2p.net import *
 import socket
 
-HOST = "10.0.0.177"
+HOST = "127.0.0.1"
 PORT = 65432
 
 root = tk.Tk()
 # root.wm_attributes('-transparentcolor', 'white')
-root.geometry("300x1000")
+root.geometry("300x1000+0+0")
 root.title("Emoji Overlay")
 
-img = ImageTk.PhotoImage(Image.open("resources/img/thinking.png"))
+img = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
 img_label = tk.Label(root, image=img)
 
-static_img_1 = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
+static_img_1 = ImageTk.PhotoImage(Image.open("resources/img/thinking.png"))
 static_img_1_label = tk.Label(root, image=static_img_1)
 
-static_img_2 = ImageTk.PhotoImage(Image.open("resources/img/facepalm.png"))
+static_img_2 = ImageTk.PhotoImage(Image.open("resources/img/happy.png"))
 static_img_2_label = tk.Label(root, image=static_img_2)
 
 text = tk.StringVar()
@@ -54,6 +54,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             if(data):
                 data = str(data.decode())
+                data = data.split(" ")[0]
+                data = data.rstrip()
                 img=ImageTk.PhotoImage(Image.open("resources/img/" + data + ".png"))
                 img_label.configure(image=img)
                 img_label.image=img
