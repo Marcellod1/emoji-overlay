@@ -10,6 +10,7 @@ root = tk.Tk()
 # root.wm_attributes('-transparentcolor', 'white')
 root.geometry("300x1000+0+0")
 root.title("Emoji Overlay")
+root.iconbitmap("resources/img/favicon.ico")
 
 img = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
 img_label = tk.Label(root, image=img)
