@@ -3,22 +3,22 @@ from PIL import ImageTk, Image
 from pyp2p.net import *
 import socket
 
-HOST = "10.0.0.177"
+HOST = "127.0.0.1"
 PORT = 65432
 
 root = tk.Tk()
 # root.wm_attributes('-transparentcolor', 'white')
-root.geometry("300x400+1600+0")
+root.geometry("300x1000+1600+0")
 root.title("Emoji Overlay")
 root.iconbitmap("resources/img/favicon.ico")
 
-img = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
+img = ImageTk.PhotoImage(Image.open("resources/img/peace.png"))
 img_label = tk.Label(root, image=img)
 
-static_img_1 = ImageTk.PhotoImage(Image.open("resources/img/thinking.png"))
+static_img_1 = ImageTk.PhotoImage(Image.open("resources/img/angry.png"))
 static_img_1_label = tk.Label(root, image=static_img_1)
 
-static_img_2 = ImageTk.PhotoImage(Image.open("resources/img/happy.png"))
+static_img_2 = ImageTk.PhotoImage(Image.open("resources/img/neutral.png"))
 static_img_2_label = tk.Label(root, image=static_img_2)
 
 text = tk.StringVar()
@@ -37,11 +37,11 @@ static_text_2.set("Abraham")
 img_label.grid(row = 0, column = 0)
 text_label.grid(row = 1, column = 0)
 
-# static_img_1_label.grid(row = 2, column = 0)
-# static_text_1_label.grid(row = 3, column = 0)
+static_img_1_label.grid(row = 2, column = 0)
+static_text_1_label.grid(row = 3, column = 0)
 
-# static_img_2_label.grid(row = 4, column = 0)
-# static_text_2_label.grid(row = 5, column = 0)
+static_img_2_label.grid(row = 4, column = 0)
+static_text_2_label.grid(row = 5, column = 0)
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
